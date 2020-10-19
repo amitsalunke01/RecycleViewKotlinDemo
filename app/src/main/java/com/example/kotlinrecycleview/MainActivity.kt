@@ -2,19 +2,29 @@ package com.example.kotlinrecycleview
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
+    private val exampleItem = generateDummyData(100)
+    private val adapter = ExampleAdapter(exampleItem)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val exampleItem = generateDummyData(100)
 
-        recycle_view.adapter = ExampleAdapter(exampleItem)
+        recycle_view.adapter = adapter
         recycle_view.layoutManager = LinearLayoutManager(this)
         recycle_view.setHasFixedSize(true)
+    }
+
+    fun insertItem(view: View) {
+
+    }
+
+    fun deleteItem(view: View) {
+
     }
 
     private fun generateDummyData(size: Int): List<ExampleItem> {
