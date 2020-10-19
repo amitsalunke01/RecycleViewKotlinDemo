@@ -6,6 +6,7 @@ import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlin.random.Random
 
 class MainActivity : AppCompatActivity() {
     private val exampleItem = generateDummyData(100)
@@ -20,14 +21,24 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun insertItem(view: View) {
+        val index = Random.nextInt(8) //0to8
+        val newItem = ExampleItem(
+            R.drawable.ic_sun,
+            "New Item at $index",
+            "Line 2"
+        )
 
+        exampleItem.add(index, newItem)
+        adapter.notifyItemInserted(index)
     }
 
     fun deleteItem(view: View) {
-
+        val index = Random.nextInt(8)
+        exampleItem.removeAt(index)
+        adapter.notifyItemRemoved(index)
     }
 
-    private fun generateDummyData(size: Int): List<ExampleItem> {
+    private fun generateDummyData(size: Int): ArrayList<ExampleItem> {
         val exampleList: ArrayList<ExampleItem> = ArrayList()
 
         for (i in 0 until size) {
